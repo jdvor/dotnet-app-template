@@ -1,0 +1,34 @@
+<Project>
+  <PropertyGroup>
+    <SemVer Condition="'$(SemVer)' == ''">0.1.0-alpha</SemVer>
+    <Version Condition="'$(Version)' == ''">0.1.0</Version>
+    <BuildNumber Condition="'$(BuildNumber)' == ''">0</BuildNumber>
+    <GitCommit Condition="'$(GitCommit)' == ''">unknown</GitCommit>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>$(SemVer)</PackageVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version).$(BuildNumber)</FileVersion>
+    <Version>$(Version).$(BuildNumber)-$(GitCommit)</Version><!-- visible as "Product version" in .dll Properties/Details on Windows -->
+    <PackageProjectUrl>https://example.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jdvor/dotnet-app-template</RepositoryUrl>
+    <PackageIconUrl>https://example.com/icon.png</PackageIconUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/jdvor/dotnet-app-template/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>sample</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright (c) 2018 Jan Dvorak</Copyright>
+    <Authors>Jan Dvorak</Authors>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\default.ruleset</CodeAnalysisRuleSet>
+    <!-- <RunCodeAnalysis>true</RunCodeAnalysis> -->
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.0" PrivateAssets="all"/>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta006" PrivateAssets="all"/>
+  </ItemGroup>
+
+</Project>

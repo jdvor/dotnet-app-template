@@ -1,0 +1,95 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "./build.sh -Target Clean -Verbosity Minimal",
+      "windows": {
+        "command": "./build.ps1 -Target Clean -Verbosity Minimal"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared",
+        "echo": false
+      }
+    },
+    {
+      "label": "Restore",
+      "type": "shell",
+      "command": "./build.sh -Target Restore -Verbosity Minimal",
+      "windows": {
+        "command": "./build.ps1 -Target Restore -Verbosity Minimal"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "echo": false
+      }
+    },
+    {
+      "label": "Build (Debug)",
+      "type": "shell",
+      "command": "./build.sh -Target Build -Configuration Debug -Verbosity Minimal",
+      "windows": {
+        "command": "./build.ps1 -Target Build -Configuration Debug -Verbosity Minimal"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "echo": false
+      }
+    },
+    {
+      "label": "Test (Debug)",
+      "type": "shell",
+      "command": "./build.sh -Target Test -Configuration Debug -Verbosity Minimal",
+      "windows": {
+        "command": "./build.ps1 -Target Test -Configuration Debug -Verbosity Minimal"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "echo": false
+      }
+    },
+    {
+      "label": "ReBuild (Debug)",
+      "type": "shell",
+      "command": "./build.sh -Target ReBuild -Configuration Debug",
+      "windows": {
+        "command": "./build.ps1 -Target ReBuild -Configuration Debug"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "echo": false
+      }
+    },
+    {
+      "label": "Pack (Release)",
+      "type": "shell",
+      "command": "./build.sh -Target Pack -Configuration Release",
+      "windows": {
+        "command": "./build.ps1 -Target Pack -Configuration Release"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "echo": false
+      }
+    }
+  ]
+}

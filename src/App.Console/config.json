@@ -1,0 +1,13 @@
+{
+  "app": {
+    "name": "dotnet-core-rabbitmq-sample",
+    "env": "test"
+  },
+  "myprocess": {
+    "baseUrl": "https://example.com",
+    "isEnabled": true
+  },
+  "rabbit": {
+    "connectionString": "host=%DOCKER_NAT_IP%:5672; virtualHost=dev; username=dev; password=dev; requestedHeartbeat=0; timeout=5"
+  }
+}
