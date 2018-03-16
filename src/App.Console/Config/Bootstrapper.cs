@@ -1,10 +1,11 @@
-namespace App.Console.Config
+﻿namespace App.Console.Config
 {
     using App.Abstractions;
     using App.Metrics;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using NLog.Extensions.Logging;
     using System;
     using System.Collections.Generic;
 
@@ -26,6 +27,7 @@ namespace App.Console.Config
             var loggerFactory = CreateLogging();
             services.AddSingleton(loggerFactory);
             services.AddLogging();
+            services.AddSingleton(loggerFactory.CreateLogger("default")); // for Program.cs
 
             // metrics root
             var metrics = CreateMetrics();
@@ -72,8 +74,11 @@ namespace App.Console.Config
 
         public static ILoggerFactory CreateLogging()
         {
-            return new LoggerFactory()
-                .AddConsole();
+            var options = new NLogProviderOptions { CaptureMessageTemplates = true, CaptureMessageProperties = true };
+            var loggerFactory = new LoggerFactory().AddNLog(options);
+            loggerFactory.ConfigureNLog("nlog.config");
+
+            return loggerFactory;
         }
 
         private static IMetrics CreateMetrics()

@@ -4,6 +4,8 @@
     using App.Abstractions.Messages;
     using App.Console.Config;
     using App.Console.Rmq;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
 
     internal static class Program
     {
@@ -13,6 +15,8 @@
                             configFilePaths: new[] { "config.json" },
                             commandLineArgs: args,
                             installers: new RmqInstaller());
+
+            logger = services.GetRequiredService<ILogger>();
 
             using (var rmq = new RmqConsumers(services))
             {
@@ -39,7 +43,7 @@
                     BuildNumber = counter,
                     DeviceFingerprint = Guid.NewGuid().ToString("N"),
                 };
-                Console.WriteLine($"publishing {counter}: {dhb}");
+                logger.LogInformation($"publishing {counter}: {dhb}");
                 rmq.Publish(dhb);
                 return;
             }
@@ -49,10 +53,11 @@
                 AppId = "AV",
                 DeviceFingerprint = Guid.NewGuid().ToString("N"),
             };
-            Console.WriteLine($"publishing {counter}: {du}");
+            logger.LogInformation($"publishing {counter}: {du}");
             rmq.Publish(du);
         }
 
         private static int counter;
+        private static ILogger logger;
     }
 }
